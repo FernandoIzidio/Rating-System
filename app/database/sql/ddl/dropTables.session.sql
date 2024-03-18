@@ -1,0 +1,4 @@
+DROP TABLE IF EXISTS manager_rating;
+DROP TABLE IF EXISTS workers;
+DROP TABLE IF EXISTS managers;
+

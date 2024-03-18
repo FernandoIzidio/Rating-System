@@ -1,0 +1,17 @@
+
+input, button {
+    display: block;
+    margin: 3px 0px;
+
+    padding: 3px;
+}
+
+.alert {
+    margin-top: 2px;
+    margin-bottom: 5px;
+    color: red;
+    font-weight: bolder;
+    font-size: 12px;
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
