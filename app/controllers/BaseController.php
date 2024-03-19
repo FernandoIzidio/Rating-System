@@ -52,7 +52,7 @@ abstract class BaseRegister extends FormController{
 
     public function validLenghtPasswords(string $var, int $number){
         if (strlen($_POST[$var]) < 8){
-            header("Location: register?passwd{$number}Error");
+            header("Location: register?password{$number}Error");
             exit();
         }
     }
@@ -80,6 +80,14 @@ abstract class BaseRegister extends FormController{
 }
 
 abstract class BaseLogin extends FormController{
+    public function validUser(){
+        $hasUser = $this->hasUser();
+        
+        if (!$hasUser) {
+            header("Location: login?invalidUser");
+            exit();
+        }
+    }
 
 }
 

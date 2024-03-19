@@ -54,7 +54,7 @@ if (filesize($json_path) > 0){
         <input type="password" name="password2" id="iPassword2" placeholder="Repita a senha"  minlength="-8">
 
         
-        <?php if (array_key_exists("passwd2Error", $_GET)): ?>
+        <?php if (array_key_exists("password2Error", $_GET)): ?>
             
             <div class='alert'>
                 <?= $json_content["FORM_ERRORS"]["PASSWORD_CHR_ERROR"] ?>

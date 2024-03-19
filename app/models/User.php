@@ -4,11 +4,15 @@ namespace app\models;
 require_once __DIR__ ."/ParentModel.php";
 class ModelUser extends BaseModel {
     
-    private function getIdSector($sector):int{
+    private function getIdSector($sector){
         $query = $this->getSecureQuery("SELECT id_sector FROM sectors WHERE sector_name = :sector", [":sector"=> $sector]);
         $query->execute();
-        return $query->fetchAll(\PDO::FETCH_ASSOC)[0]["id_sector"];
-        
+
+        $sectors = $query->fetchAll(\PDO::FETCH_ASSOC);
+
+        foreach ($sectors as $sector){
+            return $sector["id_sector"];
+        }        
     }
     
     public function registerUser(string $name, string $username, string $password, string $sector):bool{
@@ -28,9 +32,7 @@ class ModelUser extends BaseModel {
     }
 
     public function loginUser(string $username, $password):bool {
-        $user = $this->getUser($username);
-        if (count($user) === 0) return false;
-
+        
         $query = $this->getSecureQuery("SELECT password FROM workers WHERE user = :user", [":user", $username]);
 
         $query->execute();

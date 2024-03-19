@@ -14,27 +14,31 @@ final class Connection {
     private static $dbPass;
     private static $dbName;
 
+    private static $connection;
+
     public static function configureConnection() {
-        self::$dbHost = $_ENV['DB_HOST'];
-        self::$dbUser = $_ENV['DB_USER'];
-        self::$dbPass = $_ENV['DB_PASS'];
-        self::$dbName = $_ENV['DB_NAME'];
+        if (!isset(self::$connection)){
+            self::$dbHost = $_ENV['DB_HOST'];
+            self::$dbUser = $_ENV['DB_USER'];
+            self::$dbPass = $_ENV['DB_PASS'];
+            self::$dbName = $_ENV['DB_NAME'];
+
+
+            try {
+                self::$connection = new \PDO("mysql:host=" . self::$dbHost . ";dbname=" . self::$dbName, self::$dbUser, self::$dbPass);
+                self::$connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            } catch (\PDOException $e) {
+                echo "Erro de conexão: " . $e->getMessage();
+                exit();
+            }
+            
+        } 
     }
 
     public static function getConnection() {
-        self::configureConnection();
-
-        try {
-            $pdo = new \PDO("mysql:host=" . self::$dbHost . ";dbname=" . self::$dbName, self::$dbUser, self::$dbPass);
-            $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-            return $pdo;
-
-            
-        } catch (\PDOException $e) {
-            echo "Erro de conexão: " . $e->getMessage();
-            exit();
-        }
+        return self::$connection;
     }
+      
 }
 
 
