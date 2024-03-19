@@ -1,7 +1,7 @@
-INSERT INTO managers(name, sector_name) VALUES ('Patricia Gasparini', "Recursos Humanos");
-INSERT INTO managers(name, sector_name) VALUES ('Ana Gonçalvez', "Administração");
-INSERT INTO managers(name, sector_name) VALUES ('Paulo Tenório', "Markenting");
-INSERT INTO managers(name, sector_name) VALUES ('Tiago Mendes', "Financeiro");
-INSERT INTO managers(name, sector_name) VALUES ("Sr Bené", "Produção");
-INSERT INTO managers(name, sector_name) VALUES ("Carlos Augusto", "Tecnologia");
-INSERT INTO managers(name, sector_name) VALUES ("Breno Cezar", "Vendas");
+INSERT INTO sectors(sector_name) VALUES ("Recursos Humanos");
+INSERT INTO sectors(sector_name) VALUES ( "Administração");
+INSERT INTO sectors(sector_name) VALUES ( "Markenting");
+INSERT INTO sectors(sector_name) VALUES ( "Financeiro");
+INSERT INTO sectors(sector_name) VALUES ( "Produção");
+INSERT INTO sectors(sector_name) VALUES ( "Tecnologia");
+INSERT INTO sectors(sector_name) VALUES ( "Vendas");

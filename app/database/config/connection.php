@@ -1,19 +1,40 @@
 <?php
 
-require_once "/var/www/Evaluation-System/vendor/autoload.php";
+namespace app\database\config;
+use Dotenv\Dotenv;
 
+require_once "../vendor/autoload.php";
 
-$dotenv = Dotenv\Dotenv::createImmutable(dirname(dirname(__DIR__)));
+$dotenv = Dotenv::createImmutable(dirname(dirname(__DIR__)));
 $dotenv->load();
 
-$dbHost = $_ENV['DB_HOST'];
-$dbUser = $_ENV['DB_USER'];
-$dbPass = $_ENV['DB_PASS'];
-$dbName = $_ENV['DB_NAME'];
+final class Connection {
+    private static $dbHost;
+    private static $dbUser;
+    private static $dbPass;
+    private static $dbName;
 
-try{
-    $pdo = new PDO("mysql:host=$dbHost;dbname=$dbName", "$dbUser", "$dbPass");
-    $pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e){
-    echo "Erro ao tentar conectar ao banco de dados: ".$e->getMessage();
+    public static function configureConnection() {
+        self::$dbHost = $_ENV['DB_HOST'];
+        self::$dbUser = $_ENV['DB_USER'];
+        self::$dbPass = $_ENV['DB_PASS'];
+        self::$dbName = $_ENV['DB_NAME'];
+    }
+
+    public static function getConnection() {
+        self::configureConnection();
+
+        try {
+            $pdo = new \PDO("mysql:host=" . self::$dbHost . ";dbname=" . self::$dbName, self::$dbUser, self::$dbPass);
+            $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            return $pdo;
+
+            
+        } catch (\PDOException $e) {
+            echo "Erro de conexão: " . $e->getMessage();
+            exit();
+        }
+    }
 }
+
+
