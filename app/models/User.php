@@ -16,13 +16,12 @@ class ModelUser extends BaseModel {
     }
     
     public function registerUser(string $name, string $username, string $password, string $sector):bool{
-        $user = $this->getUser($username);
-        
-        if (count($user) > 0) return false;
+
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+
 
         $idSector = $this->getIdSector($sector);
 
-        $hash = password_hash($password, PASSWORD_DEFAULT);
 
         $query = $this->getSecureQuery("INSERT INTO workers(name, user, password, id_sector) VALUES (:name, :user, :password, :id_sector)", [":name"=> $name, ":user" => $username,":password" => $hash,":id_sector" => $idSector]);
     
@@ -32,14 +31,13 @@ class ModelUser extends BaseModel {
     }
 
     public function loginUser(string $username, $password):bool {
+        $query = $this->getSecureQuery("SELECT password FROM workers WHERE user = :user", [":user" => $username]);
         
-        $query = $this->getSecureQuery("SELECT password FROM workers WHERE user = :user", [":user", $username]);
-
         $query->execute();
 
-        $hash = $query->fetchAll(\PDO::FETCH_ASSOC)["password"];
+        $hash = $query->fetchAll(\PDO::FETCH_ASSOC)[0];
         
-        return password_verify($password, $hash);
+        return  password_verify($password, $hash["password"]);
     }
 
 

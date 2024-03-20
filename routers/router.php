@@ -28,8 +28,10 @@ $routes = [
     "GET" => [
         "/"  => fn() => request("HomeController", "getIndex"),
         "/register" => fn() => request("RegisterController", "getRegister"),
+        "/login" => fn() => request("LoginController", "getLogin")
     ],
     "POST"=> [
         "/register" => fn() => request("RegisterController", "postRegister"),
+        "/login" => fn() => request("LoginController", "postLogin"),
     ],
 ];

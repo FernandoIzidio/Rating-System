@@ -24,7 +24,7 @@ abstract class FormController{
 
         $r1 = new ModelUser($pdo);
 
-        $users = $r1->getUser($_POST["user"]);
+        $users = $r1->getUser(trim($_POST["user"]));
 
 
         return count($users) > 0;
@@ -36,14 +36,14 @@ abstract class FormController{
 abstract class BaseRegister extends FormController{
 
     public function validName(){
-        if ((strlen($_POST["name"]) < 3)){
+        if ((strlen(trim($_POST["name"])) < 3)){
             header("Location: register?nameError");
             exit();
         }
     }
 
     public function validLengthUser(){
-        if (strlen($_POST["user"]) < 6){
+        if (strlen(trim($_POST["user"])) < 6){
             header("Location: register?userError");
             exit();
         }
@@ -51,7 +51,7 @@ abstract class BaseRegister extends FormController{
 
 
     public function validLenghtPasswords(string $var, int $number){
-        if (strlen($_POST[$var]) < 8){
+        if (strlen(trim($_POST[$var])) < 8){
             header("Location: register?password{$number}Error");
             exit();
         }
@@ -59,7 +59,7 @@ abstract class BaseRegister extends FormController{
 
 
     public function validMatchPasswords(){
-        if ($_POST["password1"] !== $_POST["password2"]){
+        if (trim($_POST["password1"]) !== trim($_POST["password2"])){
             header("Location: register?passwdUnMatchError");    
             exit();    
         }
@@ -67,10 +67,10 @@ abstract class BaseRegister extends FormController{
 
 
     public function validStrongPasswords(){
-        if (!preg_match("/[!@#$%^&*()\-_=+{};:,<.>]/", $_POST["password1"]) || 
-            !preg_match("/[0-9]/", $_POST["password1"]) || 
-            !preg_match("/[A-Z]/", $_POST["password1"]) || 
-            !preg_match("/[a-z]/", $_POST["password1"])) {
+        if (!preg_match("/[!@#$%^&*()\-_=+{};:,<.>]/", trim($_POST["password1"])) || 
+            !preg_match("/[0-9]/", trim($_POST["password1"])) || 
+            !preg_match("/[A-Z]/", trim($_POST["password1"])) || 
+            !preg_match("/[a-z]/", trim($_POST["password1"]))) {
                 header("Location: register?passwdInvalidError");
                 exit();
         }

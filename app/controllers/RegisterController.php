@@ -9,12 +9,8 @@ require "../app/controllers/BaseController.php";
 
 class RegisterController extends BaseRegister {
     public function getRegister(){
-
         include "../app/views/register.php";
     }
-
-
-
 
 
     public function postRegister(){
@@ -51,7 +47,7 @@ class RegisterController extends BaseRegister {
 
         $userModel = new ModelUser($pdo);
         
-        $registerStatus = $userModel->registerUser($_POST["name"], $_POST["user"], password_hash($_POST["password1"], PASSWORD_DEFAULT), $_POST["sector"]);
+        $registerStatus = $userModel->registerUser(trim($_POST["name"]), trim($_POST["user"]), trim($_POST["password1"]), trim($_POST["sector"]));
 
 
         if ($registerStatus) {
