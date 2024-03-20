@@ -1,6 +1,6 @@
 <?php
 
-$json_path = "../app/logs/logerrors.json";
+$json_path = "./logs/logerrors.json";
 $json_desc  = fopen($json_path, "r");
 
 if (filesize($json_path) > 0){
@@ -95,4 +95,4 @@ if (filesize($json_path) > 0){
 
 
 
-<script src="../static/js/register.js"></script>
+<script src="/static/js/register.js"></script>

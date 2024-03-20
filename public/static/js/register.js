@@ -4,7 +4,7 @@ const alertas = document.getElementsByClassName("alert")
 const inputs = document.getElementsByTagName("input");
 
 
-fetch('/Evaluation-System/logs/logerrors.json')
+fetch('/logs/logerrors.json')
   .then(response => response.json())
   .then(data => {
     

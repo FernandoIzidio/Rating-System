@@ -5,7 +5,7 @@ require_once __DIR__ ."/ParentModel.php";
 class ModelUser extends BaseModel {
     
     public function getField($table, array $fieldTarget, $fieldFilter, $filterValue): array{
-        
+         
         $queryString = "SELECT ";
                 
         foreach ($fieldTarget as $field) { 
@@ -52,7 +52,8 @@ class ModelUser extends BaseModel {
         $query->execute();
 
         $hash = $query->fetchAll(\PDO::FETCH_ASSOC)[0];
-        
+
+
         return  password_verify($password, $hash["password"]);
     }
 

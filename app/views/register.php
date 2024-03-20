@@ -3,7 +3,7 @@
 
 function headContent() {
     echo /* html */ '
-    <link rel="stylesheet" href="../static/css/forms.css">
+    <link rel="stylesheet" href="/static/css/forms.css">
     ';
 }
 

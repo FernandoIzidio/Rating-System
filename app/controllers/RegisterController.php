@@ -5,10 +5,11 @@ namespace app\controllers;
 use app\database\config\Connection;
 use app\models\ModelUser;
 
-require "../app/controllers/BaseController.php";
+require_once "../app/controllers/BaseController.php";
 
 class RegisterController extends BaseRegister {
     public function getRegister(){
+        $this->hasLogin();
         include "../app/views/register.php";
     }
 

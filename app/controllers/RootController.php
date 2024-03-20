@@ -2,8 +2,12 @@
 
 namespace app\controllers;
 
-class RootController{
+require_once '../app/controllers/BaseController.php';
+
+class RootController extends BaseController{
     public function getRoot(){
+        $this->hasLogin();
+
         include '../app/views/home.php';
     }
 

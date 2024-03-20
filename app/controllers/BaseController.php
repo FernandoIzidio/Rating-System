@@ -10,7 +10,25 @@ namespace app\controllers;
 use app\database\config\Connection;
 use app\models\ModelUser;
 
-abstract class FormController{
+
+abstract class BaseController {
+
+    protected function hasLogin(){
+        if (isset($_SESSION) && array_key_exists("logged_in", $_SESSION) && $_SESSION["logged_in"]) {
+            header("Location: /home");
+            exit();
+        }
+    }
+
+    protected function isvalidSession(){
+        if (empty($_SESSION) || !isset($_SESSION["logged_in"]) || !$_SESSION["logged_in"]){
+            header('Location: /');  
+            exit();
+        }
+    }    
+}
+
+abstract class FormController extends BaseController{
 
     public function hasUser(){
        

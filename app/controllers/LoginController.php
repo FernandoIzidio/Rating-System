@@ -9,6 +9,7 @@ require_once "../app/controllers/BaseController.php";
 class LoginController extends BaseLogin{
 
     public function getLogin(){
+        $this->hasLogin();
         require_once "../app/views/login.php";
     }
 
@@ -28,18 +29,18 @@ class LoginController extends BaseLogin{
 
         $status = $user->loginUser(trim($_POST['user']), trim($_POST["password"]));
         
-        if (!$status) header("Location: login?loginError");
 
+        if (!$status) {
+            header("Location: login?loginError");
+            exit();
+        };
 
     
         $_SESSION["logged_in"] = true;
         $_SESSION["user"] = $_POST["user"];
         
-        $userData = $user->getField("workers", ["id_worker", "rating_permission", "admin_permission"], "user", $_POST["user"]);
+        $userData = $user->getField("workers", ["id_worker", "rating_permission", "admin_permission", "super_admin"], "user", $_POST["user"]);
 
-        print_r($userData);
-
-        echo "<br>";
 
         $_SESSION["user_id"] = $userData["id_worker"];
 
@@ -48,12 +49,13 @@ class LoginController extends BaseLogin{
     
         $_SESSION["admin_permission"] = $userData["admin_permission"];
 
+        $_SESSION["super_admin"] = $userData["super_admin"];
+
         
 
         $_SESION["last_login"] = time();
 
-        
-        print_r($_SESSION);
+    
         
         header("location: /home");
         exit();     

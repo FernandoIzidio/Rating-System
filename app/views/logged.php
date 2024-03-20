@@ -1,14 +1,3 @@
-<?php 
-
-if (empty($_SESSION) || !isset($_SESSION["logged_in"])){
-    echo "SESSÃO INVALIDA";
-    sleep(3);
-    exit();
-}
-
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS workers(
     id_sector int NOT NULL,  
     rating_permission TINYINT DEFAULT 0, 
     admin_permission TINYINT DEFAULT 0,
+    super_admin TINYINT DEFAULT 0,
     FOREIGN KEY (id_sector) REFERENCES sectors(id_sector)
 );
 
