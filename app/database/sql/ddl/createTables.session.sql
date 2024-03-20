@@ -18,8 +18,8 @@ CREATE TABLE IF NOT EXISTS workers(
     user varchar(50) NOT NULL UNIQUE, 
     password varchar(200) NOT NULL,
     id_sector int NOT NULL,  
-    rating_permission TINYINT, 
-    admin_permission TINYINT,
+    rating_permission TINYINT DEFAULT 0, 
+    admin_permission TINYINT DEFAULT 0,
     FOREIGN KEY (id_sector) REFERENCES sectors(id_sector)
 );
 

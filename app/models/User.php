@@ -4,23 +4,39 @@ namespace app\models;
 require_once __DIR__ ."/ParentModel.php";
 class ModelUser extends BaseModel {
     
-    private function getIdSector($sector){
-        $query = $this->getSecureQuery("SELECT id_sector FROM sectors WHERE sector_name = :sector", [":sector"=> $sector]);
+    public function getField($table, array $fieldTarget, $fieldFilter, $filterValue): array{
+        
+        $queryString = "SELECT ";
+                
+        foreach ($fieldTarget as $field) { 
+            $queryString .= $field . ",";
+   
+        }
+        
+        $queryString = rtrim($queryString,",") . " FROM $table WHERE $fieldFilter = :value";
+    
+    
+        $query = $this->getSecureQuery($queryString, [":value"=> $filterValue]);
         $query->execute();
 
-        $sectors = $query->fetchAll(\PDO::FETCH_ASSOC);
+        $registers = $query->fetchAll(\PDO::FETCH_ASSOC);
 
-        foreach ($sectors as $sector){
-            return $sector["id_sector"];
-        }        
+        if ($registers) {
+            return $registers[0];
+        } else {
+            throw new \Exception("Registro não encontrado");
+        }
+
     }
+
+
     
     public function registerUser(string $name, string $username, string $password, string $sector):bool{
 
         $hash = password_hash($password, PASSWORD_DEFAULT);
 
 
-        $idSector = $this->getIdSector($sector);
+        $idSector = $this->getField("sectors", ["id_sector"],  "sector_name", $sector)["id_sector"];
 
 
         $query = $this->getSecureQuery("INSERT INTO workers(name, user, password, id_sector) VALUES (:name, :user, :password, :id_sector)", [":name"=> $name, ":user" => $username,":password" => $hash,":id_sector" => $idSector]);

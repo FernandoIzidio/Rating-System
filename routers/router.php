@@ -26,9 +26,10 @@ function request( string|object $controller, string $action){
 
 $routes = [
     "GET" => [
-        "/"  => fn() => request("HomeController", "getIndex"),
+        "/"  => fn() => request("RootController", "getRoot"),
         "/register" => fn() => request("RegisterController", "getRegister"),
-        "/login" => fn() => request("LoginController", "getLogin")
+        "/login" => fn() => request("LoginController", "getLogin"), 
+        "/home" => fn() => request("HomeController", "getHome"),
     ],
     "POST"=> [
         "/register" => fn() => request("RegisterController", "postRegister"),

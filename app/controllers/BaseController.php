@@ -84,7 +84,7 @@ abstract class BaseLogin extends FormController{
         $hasUser = $this->hasUser();
         
         if (!$hasUser) {
-            header("Location: login?invalidUser");
+            header("Location: login?loginError");
             exit();
         }
     }
