@@ -14,7 +14,7 @@ require_once  RootProject::getRootPath()->controllers . "/BaseController.php";
 class LoginController extends BaseLogin{
 
     public function getLogin(){
-    
+        $this->redirectifLogged();
         echo $this->getBlade()->make("login", ['data' => $this->getLogs()])->render();
 
     }

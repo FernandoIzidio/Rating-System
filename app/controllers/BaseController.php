@@ -17,19 +17,16 @@ require_once "../app/config/config.php";
 abstract class BaseController extends RootProject{
     protected static $blade;
 
-    protected function hasLogin(){
+    protected function redirectIfLogged(){
         if (isset($_SESSION) && array_key_exists("logged_in", $_SESSION) && $_SESSION["logged_in"]) {
             header("Location: /home");
             exit();
         }
+
+        header("Location: /");
+        exit();
     }
 
-    protected function isvalidSession(){
-        if (empty($_SESSION) || !isset($_SESSION["logged_in"]) || !$_SESSION["logged_in"]){
-            header('Location: /');  
-            exit();
-        }
-    }    
 
     private function configureBlade(){
         if (!isset(self::$blade)){

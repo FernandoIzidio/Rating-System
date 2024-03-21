@@ -14,7 +14,7 @@ require_once RootProject::getRootPath()->controllers . "/BaseController.php";
 
 class RegisterController extends BaseRegister {
     public function getRegister(){
-        $this->hasLogin();
+        $this->redirectIfLogged();
 
         echo $this->getBlade()->make("register", ['data' => $this->getLogs()])->render();
     }

@@ -12,7 +12,7 @@ class HomeController extends BaseController{
 
 
     public function getHome(){
-        $this->isvalidSession();
+        $this->redirectIfLogged();
         
         echo $this->getBlade()->render("logged");
     }

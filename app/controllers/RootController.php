@@ -10,7 +10,7 @@ require_once  "../app/config/config.php";
 require_once RootProject::getRootPath()->controllers . "/BaseController.php";
 class RootController extends BaseController{
     public function getRoot(){
-        $this->hasLogin();
+        $this->redirectIfLogged();
         echo $this->getBlade()->render("root");
     }
 
