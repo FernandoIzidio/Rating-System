@@ -4,7 +4,7 @@
         
         <?php if (array_key_exists("nameError", $_GET)): ?>
             <div class='alert'>
-                {{ $data["FORM_ERRORS"]["NAME_ERROR"] }} 
+                <?php echo e($data["FORM_ERRORS"]["NAME_ERROR"]); ?> 
             </div>
         
         <?php endif; ?>
@@ -14,7 +14,7 @@
 
         <?php if (array_key_exists("userInvalidError", $_GET)): ?>
             <div class='alert'>
-                {{ $data["FORM_ERRORS"]["USER_EXISTS_ERROR"] }} 
+                <?php echo e($data["FORM_ERRORS"]["USER_EXISTS_ERROR"]); ?> 
             </div>
         <?php endif; ?>
 
@@ -23,7 +23,7 @@
         <?php if (array_key_exists("userError", $_GET)): ?>
             
             <div class='alert'>
-                {{ $data["FORM_ERRORS"]["USER_CHR_ERROR"] }}    
+                <?php echo e($data["FORM_ERRORS"]["USER_CHR_ERROR"]); ?>    
             </div>
         
         <?php endif; ?>
@@ -35,7 +35,7 @@
         <?php if (array_key_exists("password1Error", $_GET)): ?>
             
             <div class='alert'>
-                {{ $data["FORM_ERRORS"]["PASSWORD_CHR_ERROR"] }} 
+                <?php echo e($data["FORM_ERRORS"]["PASSWORD_CHR_ERROR"]); ?> 
             </div>
 
         <?php endif; ?>
@@ -47,7 +47,7 @@
         <?php if (array_key_exists("password2Error", $_GET)): ?>
             
             <div class='alert'>
-                {{ $data["FORM_ERRORS"]["PASSWORD_CHR_ERROR"] }} 
+                <?php echo e($data["FORM_ERRORS"]["PASSWORD_CHR_ERROR"]); ?> 
             </div>
         
         <?php endif; ?>
@@ -68,14 +68,15 @@
         
         <?php if (array_key_exists("passwdUnMatchError", $_GET)): ?>
             <div class='alert'>
-                {{ $data["FORM_ERRORS"]["PASSWORD_UNMATCH_ERROR"] }}
+                <?php echo e($data["FORM_ERRORS"]["PASSWORD_UNMATCH_ERROR"]); ?>
+
             </div>
         <?php endif; ?>
 
         
         <?php if (array_key_exists("passwdInvalidError", $_GET)): ?>
             <div class='alert'>
-                {{ $data["FORM_ERRORS"]["PASSWORD_STRONG_ERROR"] }} 
+                <?php echo e($data["FORM_ERRORS"]["PASSWORD_STRONG_ERROR"]); ?> 
             </div>
         <?php endif; ?>
 
@@ -85,4 +86,4 @@
 
 
 
-<script src="/static/js/register.js"></script>
+<script src="/static/js/register.js"></script><?php /**PATH /var/www/rating_system/app/views/global/partials/registerForm.blade.php ENDPATH**/ ?>

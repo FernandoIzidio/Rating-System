@@ -5,8 +5,7 @@ namespace app\controllers;
 use app\config\RootProject;
 use app\database\config\Connection;
 use app\models\ModelUser;
-
-
+use Jenssegers\Blade\Blade;
 
 require_once "../app/config/config.php";
 
@@ -16,7 +15,22 @@ require_once RootProject::getRootPath()->controllers . "/BaseController.php";
 class RegisterController extends BaseRegister {
     public function getRegister(){
         $this->hasLogin();
-        require_once  self::getRootPath()->views . "/register.php";
+        
+        $json_path = "./logs/logerrors.json";
+        $json_desc  = fopen($json_path, "r");
+
+        if (filesize($json_path) > 0){
+            $json_content = json_decode(fread($json_desc, filesize($json_path)), true);
+        }
+        
+
+
+
+        /** @var Blade $blade */
+        $blade = require_once "../app/config/blade.php";
+
+        
+        echo $blade->make("register", $json_content)->render();
     }
 
 
