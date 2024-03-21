@@ -50,11 +50,8 @@ abstract class BaseController extends RootProject{
     }
 
 
-    protected function redirectIfNotAdmin(){
-        if (isset($_SESSION) && array_key_exists("admin_permission", $_SESSION) && ($_SESSION["admin_permission"] || $_SESSION["super_admin"])){
-            header("Location: /");
-            exit();
-        }
+    protected function hasAdmin(){
+        return (isset($_SESSION) && array_key_exists("admin_permission", $_SESSION) && ($_SESSION["admin_permission"] || $_SESSION["super_admin"]));
         
     }
 
