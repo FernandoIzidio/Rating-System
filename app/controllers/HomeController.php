@@ -14,10 +14,6 @@ class HomeController extends BaseController{
     public function getHome(){
         $this->isvalidSession();
         
-        /** @var Blade $blade */
-        $blade = require_once "../app/config/blade.php";
-
-        
-        echo $blade->render("logged");
+        echo $this->getBlade()->render("logged");
     }
 }

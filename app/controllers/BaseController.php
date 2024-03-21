@@ -48,6 +48,16 @@ abstract class BaseController extends RootProject{
         return self::$blade;
     }
 
+    protected function getLogs(){
+        $json_path = "./logs/logerrors.json";
+        $json_desc  = fopen($json_path, "r");
+
+        if (filesize($json_path) > 0){
+            $json_content = json_decode(fread($json_desc, filesize($json_path)), true);
+        }
+        return $json_content;
+    }
+
 }
 
 abstract class FormController extends BaseController{

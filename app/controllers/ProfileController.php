@@ -12,14 +12,8 @@ class ProfileController extends BaseController {
 
     public function getProfile(){
         $this->isvalidSession();
-
-
-    
-        /** @var Blade $blade */
-        $blade = require_once "../app/config/blade.php";
-
         
-        echo $blade->render("profile");
+        echo $this->getBlade()->render("profile");
     }
 
 }

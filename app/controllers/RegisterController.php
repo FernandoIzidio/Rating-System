@@ -16,21 +16,7 @@ class RegisterController extends BaseRegister {
     public function getRegister(){
         $this->hasLogin();
         
-        $json_path = "./logs/logerrors.json";
-        $json_desc  = fopen($json_path, "r");
-
-        if (filesize($json_path) > 0){
-            $json_content = json_decode(fread($json_desc, filesize($json_path)), true);
-        }
-        
-
-
-
-        /** @var Blade $blade */
-        $blade = require_once "../app/config/blade.php";
-
-        
-        echo $blade->make("register", ['data' => $json_content])->render();
+        echo $this->getBlade()->make("register", ['data' => $this->getLogs()])->render();
     }
 
 
