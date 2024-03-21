@@ -1,12 +1,4 @@
-<?php
 
-
-
-if (!empty($_POST)){
-    print_r($_POST);
-}
-
-?>
 
 <!DOCTYPE html>
 <html lang="en">
