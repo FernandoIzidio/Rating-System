@@ -18,7 +18,7 @@ if (filesize($json_path) > 0){
     
     <?php if (array_key_exists("loginError", $_GET)):?>
         <div class='alert'>
-                <?= $json_content["FORM_ERRORS"]["LOGIN_ERROR"] ?>
+                <?= $data["FORM_ERRORS"]["LOGIN_ERROR"] ?>
         </div>
     <?php endif;?>
 

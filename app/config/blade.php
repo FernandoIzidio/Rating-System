@@ -11,4 +11,5 @@ use Jenssegers\Blade\Blade;
 $views = RootProject::getRootPath()->views;
 $cache = RootProject::getRootPath()->cache;
 
+
 return new Blade($views, $cache);

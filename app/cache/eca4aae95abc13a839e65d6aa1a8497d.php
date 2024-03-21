@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,23 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/static/css/style.css">
-    <?php headContent() ?>
+    <?php echo $__env->yieldContent("head"); ?>
     </head>
 <body>
     <header>
+        <?php echo $__env->yieldContent("header"); ?>
+        
         <nav>
             <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/login">Login</a></li>
-                <li><a href="/register">Register</a></li>
+                <?php echo $__env->yieldContent("links"); ?>
             </ul>
         </nav>
     </header>
 
 
     <main>
-        <?php mainContent(); ?>
+        <?php echo $__env->yieldContent("main"); ?>
     </main>
 
 </body>
-</html>
+</html><?php /**PATH /var/www/rating_system/app/views/global/base.blade.php ENDPATH**/ ?>

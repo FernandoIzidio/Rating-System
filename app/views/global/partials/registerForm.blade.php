@@ -1,20 +1,10 @@
-<?php
-
-$json_path = "./logs/logerrors.json";
-$json_desc  = fopen($json_path, "r");
-
-if (filesize($json_path) > 0){
-    $json_content = json_decode(fread($json_desc, filesize($json_path)), true);
-}?>
-
-
 <form action="/register" method="post" id="iForm">
         <input type="text" name="name" id="iName" placeholder="Nome"  minlength="-3">
         
         
         <?php if (array_key_exists("nameError", $_GET)): ?>
             <div class='alert'>
-                <?= $json_content["FORM_ERRORS"]["NAME_ERROR"] ?>
+                <?= {{ $data["FORM_ERRORS"]["NAME_ERROR"] }} ?>
             </div>
         
         <?php endif; ?>
@@ -24,7 +14,7 @@ if (filesize($json_path) > 0){
 
         <?php if (array_key_exists("userInvalidError", $_GET)): ?>
             <div class='alert'>
-                <?= $json_content["FORM_ERRORS"]["USER_EXISTS_ERROR"] ?>
+                <?= {{ $data["FORM_ERRORS"]["USER_EXISTS_ERROR"] }} ?>
             </div>
         <?php endif; ?>
 
@@ -33,7 +23,7 @@ if (filesize($json_path) > 0){
         <?php if (array_key_exists("userError", $_GET)): ?>
             
             <div class='alert'>
-                <?= $json_content["FORM_ERRORS"]["USER_CHR_ERROR"] ?>    
+                <?= {{ $data["FORM_ERRORS"]["USER_CHR_ERROR"] }} ?>    
             </div>
         
         <?php endif; ?>
@@ -45,7 +35,7 @@ if (filesize($json_path) > 0){
         <?php if (array_key_exists("password1Error", $_GET)): ?>
             
             <div class='alert'>
-                <?= $json_content["FORM_ERRORS"]["PASSWORD_CHR_ERROR"] ?>
+                <?= {{ $data["FORM_ERRORS"]["PASSWORD_CHR_ERROR"] }} ?>
             </div>
 
         <?php endif; ?>
@@ -57,7 +47,7 @@ if (filesize($json_path) > 0){
         <?php if (array_key_exists("password2Error", $_GET)): ?>
             
             <div class='alert'>
-                <?= $json_content["FORM_ERRORS"]["PASSWORD_CHR_ERROR"] ?>
+                <?= {{ $data["FORM_ERRORS"]["PASSWORD_CHR_ERROR"] }} ?>
             </div>
         
         <?php endif; ?>
@@ -78,14 +68,14 @@ if (filesize($json_path) > 0){
         
         <?php if (array_key_exists("passwdUnMatchError", $_GET)): ?>
             <div class='alert'>
-                <?= $json_content["FORM_ERRORS"]["PASSWORD_UNMATCH_ERROR"] ?>
+                <?= {{ $data["FORM_ERRORS"]["PASSWORD_UNMATCH_ERROR"] }} ?>
             </div>
         <?php endif; ?>
 
         
         <?php if (array_key_exists("passwdInvalidError", $_GET)): ?>
             <div class='alert'>
-                <?= $json_content["FORM_ERRORS"]["PASSWORD_STRONG_ERROR"] ?>
+                <?= {{ $data["FORM_ERRORS"]["PASSWORD_STRONG_ERROR"] }} ?>
             </div>
         <?php endif; ?>
 

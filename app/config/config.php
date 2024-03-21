@@ -17,7 +17,7 @@ class RootProject{
         
         $cfgproject = new self();
         $base = "../app";
-        $cfgproject->controllers = $base . "/cache";
+        $cfgproject->cache = $base . "/cache";
         $cfgproject->controllers = $base . "/controllers";
         $cfgproject->connection = $base . "/database/config";
         $cfgproject->models = $base . "/models";
