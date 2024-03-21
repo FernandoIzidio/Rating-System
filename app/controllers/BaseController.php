@@ -55,6 +55,15 @@ abstract class BaseController extends RootProject{
         return $json_content;
     }
 
+
+    protected function redirectIfnotAdmin(){
+        if (isset($_SESSION) && array_key_exists("admin_permission", $_SESSION) && ($_SESSION["admin_permission"] || $_SESSION["super_admin"])){
+            header("Location: /");
+            exit();
+        }
+        
+    }
+
 }
 
 abstract class FormController extends BaseController{
