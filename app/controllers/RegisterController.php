@@ -30,7 +30,7 @@ class RegisterController extends BaseRegister {
         $blade = require_once "../app/config/blade.php";
 
         
-        echo $blade->make("register", $json_content)->render();
+        echo $blade->make("register", ['data' => $json_content])->render();
     }
 
 

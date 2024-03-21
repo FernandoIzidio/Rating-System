@@ -25,7 +25,8 @@ class LoginController extends BaseLogin{
         /** @var Blade $blade */
         $blade = require_once "../app/config/blade.php";
 
-        echo $blade->make("login", $json_content)->render();
+        echo $blade->make("login", ['data' => $json_content])->render();
+
     }
 
     public function postLogin(){
