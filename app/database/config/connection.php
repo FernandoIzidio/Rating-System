@@ -16,7 +16,7 @@ final class Connection {
 
     private static $connection;
 
-    public static function configureConnection() {
+    private static function configureConnection() {
         if (!isset(self::$connection)){
             self::$dbHost = $_ENV['DB_HOST'];
             self::$dbUser = $_ENV['DB_USER'];
@@ -36,6 +36,7 @@ final class Connection {
     }
 
     public static function getConnection() {
+        self::configureConnection();
         return self::$connection;
     }
       

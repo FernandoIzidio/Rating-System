@@ -35,10 +35,7 @@ class LoginController extends BaseLogin{
         require_once  self::getRootPath()->models . "/User.php";
         require_once  self::getRootPath()->connection . "/connection.php";
 
-        Connection::configureConnection();
-
-        
-
+    
         $pdo  = Connection::getConnection();
 
         $user = new ModelUser($pdo);

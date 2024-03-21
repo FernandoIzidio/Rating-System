@@ -10,10 +10,12 @@ namespace app\controllers;
 use app\config\RootProject;
 use app\database\config\Connection;
 use app\models\ModelUser;
+use Jenssegers\Blade\Blade;
 
 require_once "../app/config/config.php";
 
 abstract class BaseController extends RootProject{
+    protected static $blade;
 
     protected function hasLogin(){
         if (isset($_SESSION) && array_key_exists("logged_in", $_SESSION) && $_SESSION["logged_in"]) {
@@ -28,6 +30,24 @@ abstract class BaseController extends RootProject{
             exit();
         }
     }    
+
+    private function configureBlade(){
+        if (!isset(self::$blade)){
+            require_once '../app/config/config.php';
+            require_once '../vendor/autoload.php';
+    
+    
+            $views = RootProject::getRootPath()->views;
+            $cache = RootProject::getRootPath()->cache;
+            self::$blade =  new Blade($views, $cache);
+        }
+    }
+
+    protected function getBlade(){
+        $this->configureBlade();
+        return self::$blade;
+    }
+
 }
 
 abstract class FormController extends BaseController{
@@ -40,7 +60,7 @@ abstract class FormController extends BaseController{
         
         require_once self::getRootPath()->models . "/User.php";
 
-        Connection::configureConnection();
+
 
         $pdo = Connection::getConnection();
 

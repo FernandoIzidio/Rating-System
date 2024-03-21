@@ -62,8 +62,6 @@ class RegisterController extends BaseRegister {
         require_once  self::getRootPath()->connection . "/connection.php";
         require_once self::getRootPath()->models . "/User.php";
 
-        Connection::configureConnection();
-
         $pdo = Connection::getConnection();
 
         $userModel = new ModelUser($pdo);
