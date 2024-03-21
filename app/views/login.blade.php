@@ -2,5 +2,5 @@
 
 
 @section("main")
-    @include('global.base.loginForm')
+    @include('global.partials.loginForm')
 @endsection
