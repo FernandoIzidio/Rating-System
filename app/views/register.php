@@ -1,5 +1,6 @@
 <?php
 
+use app\config\RootProject;
 
 function headContent() {
     echo /* html */ '
@@ -7,11 +8,12 @@ function headContent() {
     ';
 }
 
+require_once "../app/config/config.php";
 
 function mainContent(){
-    include "../app/views/global/partials/registerForm.php";
+    require_once  RootProject::getRootPath()->views . "/global/partials/registerForm.php";
 }
 
 
-include "../app/views/global/base.php";
+require_once RootProject::getRootPath()->views . "/global/base.php";
 

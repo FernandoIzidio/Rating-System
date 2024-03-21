@@ -2,15 +2,21 @@
 
 namespace app\controllers;
 
+use app\config\RootProject;
 use app\database\config\Connection;
 use app\models\ModelUser;
 
-require_once "../app/controllers/BaseController.php";
+
+
+require_once "../app/config/config.php";
+
+require_once RootProject::getRootPath()->controllers . "/BaseController.php";
+
 
 class RegisterController extends BaseRegister {
     public function getRegister(){
         $this->hasLogin();
-        include "../app/views/register.php";
+        require_once  self::getRootPath()->views . "/register.php";
     }
 
 
@@ -39,8 +45,8 @@ class RegisterController extends BaseRegister {
         }
 
 
-        require_once "../app/database/config/connection.php";
-        require_once "../app/models/User.php";
+        require_once  self::getRootPath()->connection . "/connection.php";
+        require_once self::getRootPath()->models . "/User.php";
 
         Connection::configureConnection();
 

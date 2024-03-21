@@ -2,22 +2,26 @@
 
 namespace app\controllers;
 
+
+use app\config\RootProject;
 use app\database\config\Connection;
 use app\models\ModelUser;
 
-require_once "../app/controllers/BaseController.php";
+require_once "../app/config/config.php";
+
+require_once  RootProject::getRootPath()->controllers . "/BaseController.php";
 class LoginController extends BaseLogin{
 
     public function getLogin(){
         $this->hasLogin();
-        require_once "../app/views/login.php";
+        require_once self::getRootPath()->views . "/login.php";
     }
 
     public function postLogin(){
         $this->validUser();
         
-        require_once "../app/models/User.php";
-        require_once "../app/database/config/connection.php";
+        require_once  self::getRootPath()->models . "/User.php";
+        require_once  self::getRootPath()->connection . "/connection.php";
 
         Connection::configureConnection();
 

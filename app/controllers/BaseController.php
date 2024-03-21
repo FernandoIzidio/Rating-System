@@ -1,17 +1,19 @@
 <?php
 /* 
-Módulo destinado a metódos de validação, os outros controllers, vão ter apenas metódos de acesso para requisições
+Módulo destinado a metódos de validação, os outros controllers vão ter apenas metódos de acesso para requisições
 
 */
 
 
 
 namespace app\controllers;
+use app\config\RootProject;
 use app\database\config\Connection;
 use app\models\ModelUser;
 
+require_once "../app/config/config.php";
 
-abstract class BaseController {
+abstract class BaseController extends RootProject{
 
     protected function hasLogin(){
         if (isset($_SESSION) && array_key_exists("logged_in", $_SESSION) && $_SESSION["logged_in"]) {
@@ -31,10 +33,12 @@ abstract class BaseController {
 abstract class FormController extends BaseController{
 
     public function hasUser(){
-       
-        require_once "../app/database/config/connection.php";
+
         
-        require_once "../app/models/User.php";
+
+        require_once self::getRootPath()->connection . "/connection.php";
+        
+        require_once self::getRootPath()->models . "/User.php";
 
         Connection::configureConnection();
 

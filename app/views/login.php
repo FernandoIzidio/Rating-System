@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+use app\config\RootProject;
 
 function headContent(){
 
@@ -15,13 +17,16 @@ function headContent(){
 }
 
 
+require_once "../app/config/config.php";
 
 function mainContent() {
-    require_once("../app/views/global/partials/loginForm.php");
+    
+    
+    require_once( RootProject::getRootPath()->views . "/global/partials/loginForm.php");
 }
 
 
-require_once ("../app/views/global/base.php");
+require_once  (RootProject::getRootPath()->views .  "/global/base.php");
 
 
 ?>

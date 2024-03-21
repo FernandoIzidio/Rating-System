@@ -1,8 +1,8 @@
 <?php 
 
 session_start();
-require '../vendor/autoload.php';
-require '../routers/router.php';
+require_once '../vendor/autoload.php';
+require_once '../routers/router.php';
 
 
 

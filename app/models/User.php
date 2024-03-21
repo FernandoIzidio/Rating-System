@@ -1,7 +1,11 @@
 <?php 
 
 namespace app\models;
-require_once __DIR__ ."/ParentModel.php";
+
+use app\config\RootProject;
+
+require_once "../app/config/config.php";
+require_once RootProject::getRootPath()->models . "/ParentModel.php";
 class ModelUser extends BaseModel {
     
     public function getField($table, array $fieldTarget, $fieldFilter, $filterValue): array{

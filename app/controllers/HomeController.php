@@ -1,7 +1,10 @@
 <?php 
 
 namespace app\controllers;
-require_once '../app/controllers/BaseController.php';
+use app\config\RootProject;
+
+require_once "../app/config/config.php";
+require_once  RootProject::getRootPath()->controllers . "/BaseController.php";
 
 class HomeController extends BaseController{
     
@@ -9,6 +12,6 @@ class HomeController extends BaseController{
 
     public function getHome(){
         $this->isvalidSession();
-        include "../app/views/logged.php";
+        require_once self::getRootPath()->views . "/logged.php";
     }
 }
