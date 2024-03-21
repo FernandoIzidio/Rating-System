@@ -1,4 +1,4 @@
-@extends("root")
+@extends("home")
 
 @section('head')
     <link rel="stylesheet" href="/static/css/forms.css">

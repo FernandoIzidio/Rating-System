@@ -5,23 +5,24 @@ namespace app\controllers;
 use app\config\RootProject;
 use app\database\config\Connection;
 use app\models\ModelUser;
-use Jenssegers\Blade\Blade;
+
 
 require_once "../app/config/config.php";
-
 require_once RootProject::getRootPath()->controllers . "/BaseController.php";
 
 
 class RegisterController extends BaseRegister {
     public function getRegister(){
-        $this->redirectIfLogged();
+        if ($this->hasSession()){
+            header("Location: /dashboard");
+        }
 
         echo $this->getBlade()->make("register", ['data' => $this->getLogs()])->render();
     }
 
 
     public function postRegister(){
-            
+                
     if (!empty($_POST)){
 
         $this->validName($_POST["name"]);
@@ -65,5 +66,6 @@ class RegisterController extends BaseRegister {
         exit();
     }
 }
+
 }
 

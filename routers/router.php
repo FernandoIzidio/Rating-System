@@ -26,12 +26,13 @@ function request( string|object $controller, string $action){
 
 $routes = [
     "GET" => [
-        "/"  => fn() => request("RootController", "getRoot"),
+        "/"  => fn() => request("HomeController", "getHome"),
         "/register" => fn() => request("RegisterController", "getRegister"),
         "/login" => fn() => request("LoginController", "getLogin"), 
-        "/home" => fn() => request("HomeController", "getHome"),
-        "/home/profile" => fn() => request("ProfileController", "getProfile"),
-        "/loggout" => fn() => request("LoggoutController", "loggout"),
+        "/dashboard" => fn() => request("DashboardController", "getDashboard"),
+        "/dashboard/profile" => fn() => request("ProfileController", "getProfile"),
+        "/dashboard/loggout" => fn() => request("LoggoutController", "loggout"),
+        "/admin" => fn() => request("AdminController", "getAdmin"),
     ],
     "POST"=> [
         "/register" => fn() => request("RegisterController", "postRegister"),

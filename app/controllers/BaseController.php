@@ -17,14 +17,8 @@ require_once "../app/config/config.php";
 abstract class BaseController extends RootProject{
     protected static $blade;
 
-    protected function redirectIfLogged(){
-        if (isset($_SESSION) && array_key_exists("logged_in", $_SESSION) && $_SESSION["logged_in"]) {
-            header("Location: /home");
-            exit();
-        }
-
-        header("Location: /");
-        exit();
+    protected function hasSession(){
+        return (isset($_SESSION) && array_key_exists("logged_in", $_SESSION) && $_SESSION["logged_in"]);
     }
 
 
@@ -56,7 +50,7 @@ abstract class BaseController extends RootProject{
     }
 
 
-    protected function redirectIfnotAdmin(){
+    protected function redirectIfNotAdmin(){
         if (isset($_SESSION) && array_key_exists("admin_permission", $_SESSION) && ($_SESSION["admin_permission"] || $_SESSION["super_admin"])){
             header("Location: /");
             exit();

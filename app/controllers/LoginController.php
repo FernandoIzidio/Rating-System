@@ -6,15 +6,16 @@ namespace app\controllers;
 use app\config\RootProject;
 use app\database\config\Connection;
 use app\models\ModelUser;
-use Jenssegers\Blade\Blade;
 
 require_once "../app/config/config.php";
 
 require_once  RootProject::getRootPath()->controllers . "/BaseController.php";
 class LoginController extends BaseLogin{
-
     public function getLogin(){
-        $this->redirectifLogged();
+        if ($this->hasSession()){
+            header("Location: /dashboard");
+        }
+
         echo $this->getBlade()->make("login", ['data' => $this->getLogs()])->render();
 
     }
@@ -60,10 +61,9 @@ class LoginController extends BaseLogin{
 
     
         
-        header("location: /home");
+        header("location: /dashboard");
         exit();     
 
     }
     
-
 }

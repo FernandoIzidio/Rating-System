@@ -1,4 +1,4 @@
-@extends("root")
+@extends("home")
 
 
 @section("main")

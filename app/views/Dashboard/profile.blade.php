@@ -1,5 +1,5 @@
 @extends("global.base")
 
 @section("links")
-    <li><a href="/loggout">Loggout</a></li>
+    <li><a href="/dashboard/loggout">Loggout</a></li>
 @endsection
