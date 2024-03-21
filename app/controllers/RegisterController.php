@@ -15,7 +15,7 @@ require_once RootProject::getRootPath()->controllers . "/BaseController.php";
 class RegisterController extends BaseRegister {
     public function getRegister(){
         $this->hasLogin();
-        
+
         echo $this->getBlade()->make("register", ['data' => $this->getLogs()])->render();
     }
 
@@ -24,20 +24,20 @@ class RegisterController extends BaseRegister {
             
     if (!empty($_POST)){
 
-        $this->validName();
+        $this->validName($_POST["name"]);
 
-        $this->validLengthUser();
+        $this->validLengthUser($_POST["user"]);
 
         for ($i=1; $i < 3; $i++) { 
-            $this->validLenghtPasswords("password{$i}", $i);
+            $this->validLenghtPasswords($_POST["password{$i}"], $i);
         }
         
-        $this->validMatchPasswords();
+        $this->validMatchPasswords($_POST["password1"], $_POST["password2"]);
 
 
-        $this->validStrongPasswords();
+        $this->validStrongPasswords($_POST["password1"]);
 
-        $statusUser = $this->hasUser();
+        $statusUser = $this->hasUser($_POST["user"]);
 
         if ($statusUser) {
             header("Location: register?userInvalidError");
