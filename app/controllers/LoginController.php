@@ -9,7 +9,7 @@ use app\models\ModelUser;
 
 
 
-require_once  "../app/Controllers/BaseController.php";
+require_once  "../app/controllers/BaseController.php";
 class LoginController extends BaseLogin{
     public function getLogin(){
         if ($this->hasSession()){

@@ -1,0 +1,1 @@
+INSERT INTO workers(name, user, password, id_sector, rating_permission, admin_permission, super_admin) VALUES ("Super Root", "root", "OlaSenhor!12", 1, 1, 1, 1)
