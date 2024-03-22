@@ -6,9 +6,9 @@ namespace app\controllers;
 
 require_once "../app/controllers/BaseController.php";
 
-class AdminController extends BaseController {
+class AssessmentsController extends BaseController {
 
-    public function getAdmin(){
+    public function getAssessments(){
         if (!$this->hasAdmin() || !$this->hasSession()){
             header("Location: /login");
             exit();
@@ -16,7 +16,7 @@ class AdminController extends BaseController {
         
         
 
-        echo $this->getBlade()->render("admin");
+        echo $this->getBlade()->render("Dashboard.assessment");
     }
 
 }

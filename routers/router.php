@@ -31,8 +31,10 @@ $routes = [
         "/login" => fn() => request("LoginController", "getLogin"), 
         "/dashboard" => fn() => request("DashboardController", "getDashboard"),
         "/dashboard/profile" => fn() => request("ProfileController", "getProfile"),
-        "/dashboard/loggout" => fn() => request("LoggoutController", "loggout"),
+        "/dashboard/assessments" => fn() => request("AssessmentsController", "getAssessments"),
+        "/dashboard/requests" => fn() => request("RequestsController", "getRequests"),
         "/admin" => fn() => request("AdminController", "getAdmin"),
+        "/loggout" => fn() => request("LoggoutController", "loggout"),
     ],
     "POST"=> [
         "/register" => fn() => request("RegisterController", "postRegister"),
