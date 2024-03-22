@@ -1,0 +1,1 @@
+<?php /**PATH /var/www/rating_system/app/views/Dashboard/requests.blade.php ENDPATH**/ ?>

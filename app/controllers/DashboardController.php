@@ -16,7 +16,7 @@ class DashboardController extends BaseController{
         }
         
         
-        echo $this->getBlade()->render("Dashboard.dashboard");
+        echo $this->getBlade()->render("dashboard.dashboard");
     }
 
 }

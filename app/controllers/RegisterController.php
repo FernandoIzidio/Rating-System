@@ -51,6 +51,20 @@ class RegisterController extends BaseRegister {
 
         $userModel = new ModelUser($pdo);
         
+
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+    
+    
+        $idSector = $userModel->getField("sectors", ["id_sector"],  "sector_name", $sector)["id_sector"];
+    
+    
+        $query = $userModel->getSecureQuery("INSERT INTO workers(name, user, password, id_sector) VALUES (:name, :user, :password, :id_sector)", [":name"=> $name, ":user" => $username,":password" => $hash,":id_sector" => $idSector]);
+        
+        $status = $query->execute();
+    
+         
+        
+        
         $registerStatus = $userModel->registerUser(trim($_POST["name"]), trim($_POST["user"]), trim($_POST["password1"]), trim($_POST["sector"]));
 
 

@@ -11,7 +11,7 @@ class ProfileController extends BaseController {
             exit();
         }
         
-        echo $this->getBlade()->render("Dashboard.profile");
+        echo $this->getBlade()->render("dashboard.profile");
         
     }
 
