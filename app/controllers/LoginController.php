@@ -3,13 +3,13 @@
 namespace app\controllers;
 
 
-use app\config\RootProject;
+
 use app\database\config\Connection;
 use app\models\ModelUser;
 
-require_once "../app/config/config.php";
 
-require_once  RootProject::getRootPath()->controllers . "/BaseController.php";
+
+require_once  "../app/Controllers/BaseController.php";
 class LoginController extends BaseLogin{
     public function getLogin(){
         if ($this->hasSession()){
@@ -23,8 +23,8 @@ class LoginController extends BaseLogin{
     public function postLogin(){
         $this->validUser();
         
-        require_once  self::getRootPath()->models . "/User.php";
-        require_once  self::getRootPath()->connection . "/connection.php";
+        require_once  "../app/models/User.php";
+        require_once  "../app/database/config/connection.php";
 
     
         $pdo  = Connection::getConnection();

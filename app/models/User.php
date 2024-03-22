@@ -2,10 +2,8 @@
 
 namespace app\models;
 
-use app\config\RootProject;
 
-require_once "../app/config/config.php";
-require_once RootProject::getRootPath()->models . "/ParentModel.php";
+require_once "../app/models/ParentModel.php";
 class ModelUser extends BaseModel {
     
     public function getField($table, array $fieldTarget, $fieldFilter, $filterValue): array{

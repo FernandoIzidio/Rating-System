@@ -1,11 +1,9 @@
 <?php 
 
 namespace app\controllers;
-use app\config\RootProject;
 
 
-require_once "../app/config/config.php";
-require_once  RootProject::getRootPath()->controllers . "/BaseController.php";
+require_once  "../app/controllers/BaseController.php";
 
 class DashboardController extends BaseController{
     public function getDashboard(){

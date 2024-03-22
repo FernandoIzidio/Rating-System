@@ -7,14 +7,14 @@ Módulo destinado a metódos de validação, os outros controllers vão ter apen
 
 
 namespace app\controllers;
-use app\config\RootProject;
+
 use app\database\config\Connection;
 use app\models\ModelUser;
 use Jenssegers\Blade\Blade;
 
-require_once "../app/config/config.php";
 
-abstract class BaseController extends RootProject{
+
+abstract class BaseController {
     protected static $blade;
 
     protected function hasSession(){
@@ -24,12 +24,11 @@ abstract class BaseController extends RootProject{
 
     private function configureBlade(){
         if (!isset(self::$blade)){
-            require_once '../app/config/config.php';
             require_once '../vendor/autoload.php';
     
     
-            $views = RootProject::getRootPath()->views;
-            $cache = RootProject::getRootPath()->cache;
+            $views = "../app/views";
+            $cache = "../app/cache";
             self::$blade =  new Blade($views, $cache);
         }
     }
@@ -63,9 +62,9 @@ abstract class FormController extends BaseController{
 
         
 
-        require_once self::getRootPath()->connection . "/connection.php";
+        require_once "../app/database/config/connection.php";
         
-        require_once self::getRootPath()->models . "/User.php";
+        require_once "../app/models/User.php";
 
 
 
