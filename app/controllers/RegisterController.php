@@ -12,6 +12,7 @@ class RegisterController extends BaseRegister {
     public function getRegister(){
         if ($this->hasSession()){
             header("Location: /dashboard");
+            exit();
         }
 
         echo $this->getBlade()->make("register", ['data' => $this->getLogs()])->render();
@@ -38,7 +39,7 @@ class RegisterController extends BaseRegister {
         $statusUser = $this->hasUser($_POST["user"]);
 
         if ($statusUser) {
-            header("Location: register?userInvalidError");
+            header("Location: /register?userInvalidError");
             exit();
         }
 
@@ -54,11 +55,11 @@ class RegisterController extends BaseRegister {
 
 
         if ($registerStatus) {
-            header("Location: login");
+            header("Location: /login");
             exit();
         }
 
-        header("Location: register?error");
+        header("Location: /register?error");
 
         exit();
     }

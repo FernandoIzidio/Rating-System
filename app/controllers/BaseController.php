@@ -85,14 +85,14 @@ abstract class BaseRegister extends FormController{
 
     public function validName(string $name){
         if ((strlen(trim($name)) < 3)){
-            header("Location: register?nameError");
+            header("Location: /register?nameError");
             exit();
         }
     }
 
     public function validLengthUser(string $user){
         if (strlen(trim($user)) < 6){
-            header("Location: register?userError");
+            header("Location: /register?userError");
             exit();
         }
     }
@@ -100,7 +100,7 @@ abstract class BaseRegister extends FormController{
 
     public function validLenghtPasswords(string $password, string $index = '1'){
         if (strlen(trim($password) < 8)){
-            header("Location: register?password{$index}Error");
+            header("Location: /register?password{$index}Error");
             exit();
         }
     }
@@ -108,7 +108,7 @@ abstract class BaseRegister extends FormController{
 
     public function validMatchPasswords(string $password1, string $password2){
         if (trim($password1) !== trim($password2)){
-            header("Location: register?passwdUnMatchError");    
+            header("Location: /register?passwdUnMatchError");    
             exit();    
         }
     }
@@ -119,7 +119,7 @@ abstract class BaseRegister extends FormController{
             !preg_match("/[0-9]/", trim($password)) || 
             !preg_match("/[A-Z]/", trim($password)) || 
             !preg_match("/[a-z]/", trim($password))) {
-                header("Location: register?passwdInvalidError");
+                header("Location: /register?passwdInvalidError");
                 exit();
         }
     }
@@ -132,7 +132,7 @@ abstract class BaseLogin extends FormController{
         $hasUser = $this->hasUser($_POST["user"]);
         
         if (!$hasUser) {
-            header("Location: login?loginError");
+            header("Location: /login?loginError");
             exit();
         }
     }

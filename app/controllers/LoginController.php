@@ -14,6 +14,7 @@ class LoginController extends BaseLogin{
     public function getLogin(){
         if ($this->hasSession()){
             header("Location: /dashboard");
+            exit();
         }
 
         echo $this->getBlade()->make("login", ['data' => $this->getLogs()])->render();
@@ -35,7 +36,7 @@ class LoginController extends BaseLogin{
         
 
         if (!$status) {
-            header("Location: login?loginError");
+            header("Location: /login?loginError");
             exit();
         };
 

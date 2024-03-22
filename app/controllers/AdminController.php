@@ -8,8 +8,9 @@ require_once "../app/controllers/BaseController.php";
 class AdminController extends BaseController {
 
     public function getAdmin(){
-        if (!$this->hasAdmin()){
-            header("Location: /");
+        if (!$this->hasAdmin() || !$this->hasSession()){
+            header("Location: /login");
+            exit();
         }
         
         
