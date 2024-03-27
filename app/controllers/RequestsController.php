@@ -3,13 +3,10 @@
 namespace app\controllers;
 
 
-
-require_once "../app/controllers/BaseController.php";
-
 class RequestsController extends BaseController {
 
-    public function getRequests(){
-        if (!$this->hasAdmin() || !$this->hasSession()){
+    public function getView(){
+        if (!$this->hasSession()){
             header("Location: /login");
             exit();
         }

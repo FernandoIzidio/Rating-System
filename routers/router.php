@@ -26,18 +26,18 @@ function request( string|object $controller, string $action){
 
 $routes = [
     "GET" => [
-        "/"  => fn() => request("HomeController", "getHome"),
-        "/register" => fn() => request("RegisterController", "getRegister"),
-        "/login" => fn() => request("LoginController", "getLogin"), 
-        "/dashboard" => fn() => request("DashboardController", "getDashboard"),
-        "/dashboard/profile" => fn() => request("ProfileController", "getProfile"),
-        "/dashboard/assessments" => fn() => request("AssessmentsController", "getAssessments"),
-        "/dashboard/requests" => fn() => request("RequestsController", "getRequests"),
-        "/admin" => fn() => request("AdminController", "getAdmin"),
+        "/"  => fn() => request("HomeController", "getView"),
+        "/register" => fn() => request("RegisterController", "getView"),
+        "/login" => fn() => request("LoginController", "getView"), 
+        "/dashboard" => fn() => request("DashboardController", "getView"),
+        "/dashboard/profile" => fn() => request("ProfileController", "getView"),
+        "/dashboard/assessments" => fn() => request("AssessmentsController", "getView"),
+        "/dashboard/requests" => fn() => request("RequestsController", "getView"),
+        "/admin" => fn() => request("AdminController", "getView"),
         "/loggout" => fn() => request("LoggoutController", "loggout"),
     ],
     "POST"=> [
-        "/register" => fn() => request("RegisterController", "postRegister"),
-        "/login" => fn() => request("LoginController", "postLogin"),
+        "/register" => fn() => request("RegisterController", "postView"),
+        "/login" => fn() => request("LoginController", "postView"),
     ],
 ];

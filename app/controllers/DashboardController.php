@@ -3,10 +3,8 @@
 namespace app\controllers;
 
 
-require_once  "../app/controllers/BaseController.php";
-
 class DashboardController extends BaseController{
-    public function getDashboard(){
+    public function getView(){
         if (!$this->hasSession()){
             header("Location: /login");
             exit();

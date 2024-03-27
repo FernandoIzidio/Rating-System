@@ -25,4 +25,4 @@
     </main>
 
 </body>
-</html><?php /**PATH /var/www/rating_system/app/views/global/base.blade.php ENDPATH**/ ?>
+</html><?php /**PATH /var/www/Rating-System/app/views/global/base.blade.php ENDPATH**/ ?>

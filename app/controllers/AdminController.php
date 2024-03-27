@@ -3,19 +3,14 @@
 namespace app\controllers;
 
 
-
-require_once "../app/controllers/BaseController.php";
-
 class AdminController extends BaseController {
 
-    public function getAdmin(){
+    protected function getView(){
         if (!$this->hasAdmin() || !$this->hasSession()){
             header("Location: /login");
             exit();
         }
         
-        
-
         echo $this->getBlade()->render("admin");
     }
 

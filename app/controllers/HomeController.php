@@ -2,19 +2,13 @@
 
 namespace app\controllers;
 use app\database\config\Connection;
-use app\models\ModelUser;
-
-
-require_once "../app/controllers/BaseController.php";
-
+use app\models\UserModel;
 
 class HomeController extends BaseController{
-    public function getHome(){
+    public function getView(){
         
         if ($this->hasAdmin()){
-            require_once  "../app/models/User.php";
-            require_once  "../app/database/config/connection.php";
-            $user = new ModelUser(Connection::getConnection());
+            $user = new UserModel(Connection::getConnection());
 
         
             

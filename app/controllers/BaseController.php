@@ -4,12 +4,9 @@ Módulo destinado a metódos de validação, os outros controllers vão ter apen
 
 */
 
-
-
 namespace app\controllers;
-
 use app\database\config\Connection;
-use app\models\ModelUser;
+use app\models\UserModel;
 use Jenssegers\Blade\Blade;
 
 
@@ -17,28 +14,12 @@ use Jenssegers\Blade\Blade;
 abstract class BaseController {
     protected static $blade;
 
-    protected function hasSession(){
+    protected function hasSession():bool{
         return (isset($_SESSION) && array_key_exists("logged_in", $_SESSION) && $_SESSION["logged_in"]);
     }
-
-
-    private function configureBlade(){
-        if (!isset(self::$blade)){
-            require_once '../vendor/autoload.php';
     
-    
-            $views = "../app/views";
-            $cache = "../app/cache";
-            self::$blade =  new Blade($views, $cache);
-        }
-    }
 
-    protected function getBlade(){
-        $this->configureBlade();
-        return self::$blade;
-    }
-
-    protected function getLogs(){
+    protected function getLogs(): array{
         $json_path = "./logs/logerrors.json";
         $json_desc  = fopen($json_path, "r");
 
@@ -49,28 +30,23 @@ abstract class BaseController {
     }
 
 
-    protected function hasAdmin(){
+    protected function getBlade():Blade{
+        if (!isset(self::$blade)){
+        self::$blade = new Blade("../app/views", "../app/cache");
+        }
+        return self::$blade;
+    }
+
+    protected function hasAdmin():bool{
         return (isset($_SESSION) && array_key_exists("admin_permission", $_SESSION) && ($_SESSION["admin_permission"] || $_SESSION["super_admin"]));
         
     }
 
-}
-
-abstract class FormController extends BaseController{
-
-    public function hasUser(string $user){
-
-        
-
-        require_once "../app/database/config/connection.php";
-        
-        require_once "../app/models/User.php";
-
-
+    public function hasUser(string $user):bool{
 
         $pdo = Connection::getConnection();
 
-        $r1 = new ModelUser($pdo);
+        $r1 = new UserModel($pdo);
 
         $users = $r1->getUser(trim($user));
 
@@ -79,9 +55,13 @@ abstract class FormController extends BaseController{
 
     }
 
+    protected abstract function getView();
+
 }
 
-abstract class BaseRegister extends FormController{
+abstract class BaseRegister extends BaseController{
+ 
+
 
     public function validName(string $name){
         if ((strlen(trim($name)) < 3)){
@@ -124,10 +104,13 @@ abstract class BaseRegister extends FormController{
         }
     }
 
-    
+    protected abstract function postView();
+
 }
 
-abstract class BaseLogin extends FormController{
+abstract class BaseLogin extends BaseController{
+  
+
     public function validUser(){
         $hasUser = $this->hasUser($_POST["user"]);
         
@@ -136,6 +119,8 @@ abstract class BaseLogin extends FormController{
             exit();
         }
     }
+
+    protected abstract function postView();
 
 }
 

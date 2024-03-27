@@ -3,8 +3,8 @@
 namespace app\models;
 
 
-require_once "../app/models/ParentModel.php";
-class ModelUser extends BaseModel {
+
+class UserModel extends BaseModel {
     
     public function getField($table, array $fieldTarget, $fieldFilter, $filterValue): array{
          

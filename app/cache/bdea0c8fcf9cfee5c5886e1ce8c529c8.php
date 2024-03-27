@@ -86,4 +86,4 @@
 
 
 
-<script src="/static/js/register.js"></script><?php /**PATH /var/www/rating_system/app/views/global/partials/registerForm.blade.php ENDPATH**/ ?>
+<script src="/static/js/register.js"></script><?php /**PATH /var/www/Rating-System/app/views/global/partials/registerForm.blade.php ENDPATH**/ ?>

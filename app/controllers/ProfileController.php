@@ -2,10 +2,8 @@
 
 namespace app\controllers;
 
-require_once "../app/controllers/BaseController.php";
-
 class ProfileController extends BaseController {
-    public function getProfile(){
+    public function getView(){
         if (!$this->hasSession()){
             header("Location: /login");
             exit();

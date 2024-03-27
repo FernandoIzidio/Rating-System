@@ -8,7 +8,8 @@
     
     <?php if (array_key_exists("loginError", $_GET)):?>
         <div class='alert'>
-            {{ $data["FORM_ERRORS"]["LOGIN_ERROR"] }}
+            <?php echo e($data["FORM_ERRORS"]["LOGIN_ERROR"]); ?>
+
         </div>
     <?php endif;?>
 
@@ -16,4 +17,4 @@
 
     
 
-</form>
+</form><?php /**PATH /var/www/Rating-System/app/views/global/partials/loginForm.blade.php ENDPATH**/ ?>

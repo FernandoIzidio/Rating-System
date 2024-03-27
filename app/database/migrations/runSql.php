@@ -1,5 +1,5 @@
 <?php
-require_once ("./selectSql.php");
+
 $executeSecure = false;
 
 if (isset($_POST['sql_files']) && is_array($_POST['sql_files'])) {

@@ -1,17 +1,14 @@
 <?php 
 
 namespace app\controllers;
-
-
-
 use app\database\config\Connection;
-use app\models\ModelUser;
+use app\models\UserModel;
+
+require_once "../app/config/loader.php";
 
 
-
-require_once  "../app/controllers/BaseController.php";
 class LoginController extends BaseLogin{
-    public function getLogin(){
+    public function getView(){
         if ($this->hasSession()){
             header("Location: /dashboard");
             exit();
@@ -21,16 +18,14 @@ class LoginController extends BaseLogin{
 
     }
 
-    public function postLogin(){
+
+    public function postView(){
         $this->validUser();
         
-        require_once  "../app/models/User.php";
-        require_once  "../app/database/config/connection.php";
-
     
         $pdo  = Connection::getConnection();
 
-        $user = new ModelUser($pdo);
+        $user = new UserModel($pdo);
 
         $status = $user->loginUser(trim($_POST['user']), trim($_POST["password"]));
         
