@@ -1,1 +1,1 @@
-INSERT INTO workers(name, user, password, id_sector, rating_permission, admin_permission, super_admin) VALUES ("Super Root", "root", "OlaSenhor!12", 1, 1, 1, 1)
+INSERT INTO workers(name, user, email ,password, id_sector, rating_permission, admin_permission, super_admin) VALUES ("Super Root","root",  "root@gmail.com", "OlaSenhor!12", 1, 1, 1, 1);
