@@ -24,22 +24,48 @@ class RegisterController extends BaseRegister {
             $username = trim($_POST['user']);
             $email = trim($_POST['email']);
             $password1 = trim($_POST['password1']);
+            $password2 = trim($_POST['password2']);
             $sector = trim($_POST['sector']);
 
 
 
-            $this->validName($name);
+            if (!$this->isValidName($name)){
+                header("Location: /register?nameError");
+                exit();
+            }
+
+            
+            if (!$this->isValidUser($username)){
+                header("Location: /register?userError");
+                exit();
+            }
+
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+                header("Location: /register?emailError");
+                exit();
+            }
     
-            $this->validLengthUser($username);
-    
-            for ($i=1; $i < 3; $i++) { 
-                $this->validLenghtPasswords($_POST["password{$i}"], $i);
+            if (!$this->isValidPassword($password1)){
+                header("Location: /register?passwordError");
+                exit();
+            }
+
+            if (!$this->isValidPassword($password2)){
+                header("Location: /register?passwordError");
+                exit();
             }
             
-            $this->validMatchPasswords($_POST["password1"], $_POST["password2"]);
+            if (!$this->isMatchPasswords($password1, $password2)){
+                header("Location: /register?passwordError");
+                exit();
+            }
+                
+            if (!$this->isStrongPassword($password1)){
+                header("Location: /register?passwdInvalidError");
+                exit();
+            }
     
-    
-            $this->validStrongPasswords($_POST["password1"]);
+       
     
             $hasUser = $this->hasUser($username);
     

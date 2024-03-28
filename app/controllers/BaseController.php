@@ -5,11 +5,9 @@ Módulo destinado a metódos de validação, os outros controllers vão ter apen
 */
 
 namespace app\controllers;
-use app\database\config\Connection;
 use app\models\UserModel;
 use Jenssegers\Blade\Blade;
-
-
+use PhpParser\Node\Stmt\Return_;
 
 abstract class BaseController {
     protected static $blade;
@@ -60,46 +58,32 @@ abstract class BaseRegister extends BaseController{
  
 
 
-    public function validName(string $name){
-        if ((strlen(trim($name)) < 3)){
-            header("Location: /register?nameError");
-            exit();
-        }
+    public function isValidName(string $name){
+        return ((strlen(trim($name)) >= 3));
     }
 
-    public function validLengthUser(string $user){
-        if (strlen(trim($user)) < 6){
-            header("Location: /register?userError");
-            exit();
-        }
+    public function isValidUser(string $user){
+        return (strlen(trim($user)) >= 6);
     }
 
 
-    public function validLenghtPasswords(string $password, string $index = '1'){
-        if (strlen(trim($password) < 8)){
-            header("Location: /register?password{$index}Error");
-            exit();
-        }
+    public function isValidPassword(string $password){
+        return (strlen(trim($password)) >= 8);
     }
 
 
-    public function validMatchPasswords(string $password1, string $password2){
-        if (trim($password1) !== trim($password2)){
-            header("Location: /register?passwdUnMatchError");    
-            exit();    
-        }
-    }
+    public function isMatchPasswords(string $password1, string $password2){
+        return (trim($password1) === trim($password2));
+     }
+    
 
 
-    public function validStrongPasswords(string $password){
-        if (!preg_match("/[!@#$%^&*()\-_=+{};:,<.>]/", trim($password)) || 
-            !preg_match("/[0-9]/", trim($password)) || 
-            !preg_match("/[A-Z]/", trim($password)) || 
-            !preg_match("/[a-z]/", trim($password))) {
-                header("Location: /register?passwdInvalidError");
-                exit();
+    public function isStrongPassword(string $password){
+        return (preg_match("/[!@#$%^&*()\-_=+{};:,<.>]/", trim($password)) && 
+            preg_match("/[0-9]/", trim($password)) && 
+            preg_match("/[A-Z]/", trim($password)) && 
+            preg_match("/[a-z]/", trim($password)));
         }
-    }
 
     protected abstract function postView();
 
