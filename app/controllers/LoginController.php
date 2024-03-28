@@ -19,7 +19,11 @@ class LoginController extends BaseLogin{
 
 
     public function postView(){
-        $this->validUser();
+
+        if (!$this->hasUser(trim($_POST["user"]))){
+            header("Location: /login?userError");
+            exit();
+        }
         
     
 

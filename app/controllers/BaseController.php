@@ -92,15 +92,6 @@ abstract class BaseRegister extends BaseController{
 abstract class BaseLogin extends BaseController{
   
 
-    public function validUser(){
-        $hasUser = $this->hasUser($_POST["user"]);
-        
-        if (!$hasUser) {
-            header("Location: /login?loginError");
-            exit();
-        }
-    }
-
     protected abstract function postView();
 
 }
