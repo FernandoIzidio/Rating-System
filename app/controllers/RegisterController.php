@@ -1,8 +1,6 @@
 <?php
 
 namespace app\controllers;
-
-use app\database\config\Connection;
 use app\models\UserModel;
 
 require_once "../app/config/loader.php";
@@ -22,10 +20,17 @@ class RegisterController extends BaseRegister {
     public function postView(){
 
         if (!empty($_POST)){
+            $name = trim($_POST['name']);
+            $username = trim($_POST['user']);
+            $email = trim($_POST['email']);
+            $password1 = trim($_POST['password1']);
+            $sector = trim($_POST['sector']);
 
-            $this->validName($_POST["name"]);
+
+
+            $this->validName($name);
     
-            $this->validLengthUser($_POST["user"]);
+            $this->validLengthUser($username);
     
             for ($i=1; $i < 3; $i++) { 
                 $this->validLenghtPasswords($_POST["password{$i}"], $i);
@@ -36,19 +41,18 @@ class RegisterController extends BaseRegister {
     
             $this->validStrongPasswords($_POST["password1"]);
     
-            $hasUser = $this->hasUser($_POST["user"]);
+            $hasUser = $this->hasUser($username);
     
             if ($hasUser) {
                 header("Location: /register?userInvalidError");
                 exit();
             }
-    
-    
-            $pdo = Connection::getConnection();
-    
-            $userModel = new UserModel($pdo);
             
-            $registerStatus = $userModel->registerUser(trim($_POST["name"]), trim($_POST["user"]), trim($_POST["password1"]), trim($_POST["sector"]));
+    
+    
+            
+            
+            $registerStatus = UserModel::registerUser(trim($name), trim($username), trim($_POST["password1"]), trim($_POST["sector"]));
     
     
             if ($registerStatus) {

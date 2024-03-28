@@ -29,6 +29,19 @@
         <?php endif; ?>
 
 
+        <input type="email" name="user" id="iUser" placeholder="Usuário"  minlength="-6">
+        
+
+        <?php if (array_key_exists("emailInvalidError", $_GET)): ?>
+            <div class='alert'>
+                {{ $data["FORM_ERRORS"]["EMAIL_EXISTS_ERROR"] }} 
+            </div>
+        <?php endif; ?>
+
+
+
+
+
         <input type="password" name="password1" id="iPassword1" placeholder="Digite a senha"  minlength="-8">
 
 

@@ -44,11 +44,8 @@ abstract class BaseController {
 
     public function hasUser(string $user):bool{
 
-        $pdo = Connection::getConnection();
 
-        $r1 = new UserModel($pdo);
-
-        $users = $r1->getUser(trim($user));
+        $users = UserModel::getUser(trim($user));
 
 
         return count($users) > 0;

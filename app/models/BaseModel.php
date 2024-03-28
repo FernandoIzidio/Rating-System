@@ -2,15 +2,10 @@
 
 namespace app\models;
 
+use app\database\config\Connection;
 
 abstract class BaseModel {
-    protected $pdo;
-
-    function __construct(\PDO $pdo) {
-        $this->pdo = $pdo;
-    }
-
-    /**
+/**
  * Prepares a secure query with parameter binding.
  *
  * @param string $query The SQL query to be prepared.
@@ -18,8 +13,10 @@ abstract class BaseModel {
  *
  * @return \PDOStatement The prepared statement object.
  */
-protected function getSecureQuery(string $query, ...$params): \PDOStatement {
-    $query = $this->pdo->prepare($query);
+protected static function getSecureQuery(string $query, ...$params): \PDOStatement {
+    $pdo = Connection::getConnection();
+
+    $query = $pdo->prepare($query);
 
     if (!empty($params)) {
         foreach ($params as $dict) {
@@ -33,7 +30,7 @@ protected function getSecureQuery(string $query, ...$params): \PDOStatement {
 }
 
 
-    /**
+/**
  * Returns severals requested fields from the database based on the primary key value or like pk
  *
  * @param string $pkName The name of the primary key column
@@ -41,5 +38,5 @@ protected function getSecureQuery(string $query, ...$params): \PDOStatement {
  * @param array $requestedFields The list of fields to be retrieved
  * @return array The record with the requested fields
  */
-abstract protected function getField(string $pkName, string $pkValue, array $requestedFields): array;
+abstract public static function getField(string $pkName, string $pkValue, array $requestedFields): array;
 }

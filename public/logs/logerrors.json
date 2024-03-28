@@ -3,6 +3,7 @@
         "NAME_ERROR": "O nome deve ter pelo menos 3 caracteres", 
         "USER_CHR_ERROR": "O nome de usuário deve ter pelo menos 6 caracteres",
         "USER_EXISTS_ERROR": "Usuário já registrado no sistema",
+        "EMAIL_EXISTS_ERROR": "Email já registrado no sistema",
         "PASSWORD_CHR_ERROR": "A senha deve ter pelo menos 8 caracteres",
         "PASSWORD_UNMATCH_ERROR": "As senhas não correspondem",
         "PASSWORD_STRONG_ERROR": "A senha tem que conter ao menos um simbolo, número e letras maiúsculas e minúsculas",

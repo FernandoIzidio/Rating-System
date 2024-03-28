@@ -1,7 +1,6 @@
 <?php 
 
 namespace app\controllers;
-use app\database\config\Connection;
 use app\models\UserModel;
 
 require_once "../app/config/loader.php";
@@ -23,11 +22,8 @@ class LoginController extends BaseLogin{
         $this->validUser();
         
     
-        $pdo  = Connection::getConnection();
 
-        $user = new UserModel($pdo);
-
-        $hash = $user->getHash(trim($_POST['user']))[0]['password'];
+        $hash = UserModel::getHash(trim($_POST['user']))[0]['password'];
         
         $status = password_verify($_POST["password"], $hash);
 
@@ -40,7 +36,7 @@ class LoginController extends BaseLogin{
         $_SESSION["logged_in"] = true;
         $_SESSION["user"] = $_POST["user"];
         
-        $userData = $user->getField("user", $_POST["user"], ["id_worker", "rating_permission", "admin_permission", "super_admin"])[0];
+        $userData = UserModel::getField("user", $_POST["user"], ["id_worker", "rating_permission", "admin_permission", "super_admin"])[0];
 
 
         $_SESSION["user_id"] = $userData["id_worker"];

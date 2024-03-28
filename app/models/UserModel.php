@@ -6,7 +6,7 @@ namespace app\models;
 
 class UserModel extends BaseModel {
     
-    public function getField(string $pkName, string $pkValue, array $requestedFields): array{
+    public static function getField(string $pkName, string $pkValue, array $requestedFields): array{
          
         $queryString = "SELECT ";
                 
@@ -18,7 +18,7 @@ class UserModel extends BaseModel {
         $queryString = rtrim($queryString,",") . " FROM workers WHERE $pkName = :value";
     
     
-        $query = $this->getSecureQuery($queryString, [":value"=> $pkValue]);
+        $query = self::getSecureQuery($queryString, [":value"=> $pkValue]);
         $query->execute();
 
         $registers = $query->fetchAll(\PDO::FETCH_ASSOC);
@@ -31,47 +31,51 @@ class UserModel extends BaseModel {
 
     }
 
-    public function updateUser(){
+    public static function updateUser(){
 
     }
 
-    public function updatePassword(){
+    public static function updatePassword(){
 
     }
     
-    public function updateSector(){}
+    public static function updateSector(){}
 
-    public function deleteUser(){
-
-    }
-
-
-    public function setAdminPermission(){
+    public static function deleteUser(){
 
     }
 
 
-    public function setSuperAdminPermission(){
+    public static function setAdminPermission(){
 
     }
 
-    public function registerUser(string $name, string $username, string $password, string $sector):bool{
+
+    public static function setSuperAdminPermission(){
+
+    }
+
+    public static function setRatingPermission(){
+
+    }
+
+    public static function registerUser(string $name, string $username, string $password, string $sector):bool{
 
         $hash = password_hash($password, PASSWORD_DEFAULT);
 
 
-        $idSector = $this->getField("sector_name", $sector, ["id_sector"])[0]["id_sector"];
+        $idSector = self::getField("sector_name", $sector, ["id_sector"])[0]["id_sector"];
 
 
-        $query = $this->getSecureQuery("INSERT INTO workers(name, user, password, id_sector) VALUES (:name, :user, :password, :id_sector)", [":name"=> $name, ":user" => $username,":password" => $hash,":id_sector" => $idSector]);
+        $query = self::getSecureQuery("INSERT INTO workers(name, user, password, id_sector) VALUES (:name, :user, :password, :id_sector)", [":name"=> $name, ":user" => $username,":password" => $hash,":id_sector" => $idSector]);
     
         $status = $query->execute();
 
         return $status; 
     }
 
-    public function getHash(string $username):array {
-        $query = $this->getSecureQuery("SELECT password FROM workers WHERE user = :user", [":user" => $username]);
+    public static function getHash(string $username):array {
+        $query = self::getSecureQuery("SELECT password FROM workers WHERE user = :user", [":user" => $username]);
         
         $query->execute();
 
@@ -82,8 +86,8 @@ class UserModel extends BaseModel {
     }
 
 
-    public function getUser(string $username):array {
-        $query = $this->getSecureQuery("SELECT user FROM workers WHERE user = :user", [":user" => $username]);
+    public static function getUser(string $username):array {
+        $query = self::getSecureQuery("SELECT user FROM workers WHERE user = :user", [":user" => $username]);
         $query->execute();
 
         return $query->fetchAll(\PDO::FETCH_ASSOC);
