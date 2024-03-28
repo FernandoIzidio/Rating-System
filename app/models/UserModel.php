@@ -6,19 +6,19 @@ namespace app\models;
 
 class UserModel extends BaseModel {
     
-    public function getField($table, array $fieldTarget, $fieldFilter, $filterValue): array{
+    public function getField(string $pkName, string $pkValue, array $requestedFields): array{
          
         $queryString = "SELECT ";
                 
-        foreach ($fieldTarget as $field) { 
+        foreach ($requestedFields as $field) { 
             $queryString .= $field . ",";
    
         }
         
-        $queryString = rtrim($queryString,",") . " FROM $table WHERE $fieldFilter = :value";
+        $queryString = rtrim($queryString,",") . " FROM workers WHERE $pkName = :value";
     
     
-        $query = $this->getSecureQuery($queryString, [":value"=> $filterValue]);
+        $query = $this->getSecureQuery($queryString, [":value"=> $pkValue]);
         $query->execute();
 
         $registers = $query->fetchAll(\PDO::FETCH_ASSOC);
@@ -31,14 +31,36 @@ class UserModel extends BaseModel {
 
     }
 
+    public function updateUser(){
 
+    }
+
+    public function updatePassword(){
+
+    }
     
+    public function updateSector(){}
+
+    public function deleteUser(){
+
+    }
+
+
+    public function setAdminPermission(){
+
+    }
+
+
+    public function setSuperAdminPermission(){
+
+    }
+
     public function registerUser(string $name, string $username, string $password, string $sector):bool{
 
         $hash = password_hash($password, PASSWORD_DEFAULT);
 
 
-        $idSector = $this->getField("sectors", ["id_sector"],  "sector_name", $sector)["id_sector"];
+        $idSector = $this->getField("sector_name", $sector, ["id_sector"])[0]["id_sector"];
 
 
         $query = $this->getSecureQuery("INSERT INTO workers(name, user, password, id_sector) VALUES (:name, :user, :password, :id_sector)", [":name"=> $name, ":user" => $username,":password" => $hash,":id_sector" => $idSector]);
@@ -48,15 +70,15 @@ class UserModel extends BaseModel {
         return $status; 
     }
 
-    public function loginUser(string $username, $password):bool {
+    public function getHash(string $username):array {
         $query = $this->getSecureQuery("SELECT password FROM workers WHERE user = :user", [":user" => $username]);
         
         $query->execute();
 
-        $hash = $query->fetchAll(\PDO::FETCH_ASSOC)[0];
+        $hash = $query->fetchAll(\PDO::FETCH_ASSOC);
 
 
-        return  password_verify($password, $hash["password"]);
+        return $hash;
     }
 
 

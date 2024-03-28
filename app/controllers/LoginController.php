@@ -27,8 +27,9 @@ class LoginController extends BaseLogin{
 
         $user = new UserModel($pdo);
 
-        $status = $user->loginUser(trim($_POST['user']), trim($_POST["password"]));
+        $hash = $user->getHash(trim($_POST['user']))[0]['password'];
         
+        $status = password_verify($_POST["password"], $hash);
 
         if (!$status) {
             header("Location: /login?loginError");
@@ -39,7 +40,7 @@ class LoginController extends BaseLogin{
         $_SESSION["logged_in"] = true;
         $_SESSION["user"] = $_POST["user"];
         
-        $userData = $user->getField("workers", ["id_worker", "rating_permission", "admin_permission", "super_admin"], "user", $_POST["user"]);
+        $userData = $user->getField("user", $_POST["user"], ["id_worker", "rating_permission", "admin_permission", "super_admin"])[0];
 
 
         $_SESSION["user_id"] = $userData["id_worker"];
