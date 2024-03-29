@@ -9,8 +9,7 @@ class SectorModel extends BaseModel{
         foreach ($requestedFields as $field) { 
             $queryString .= $field . ",";
         }
-        $queryString.= rtrim($queryString, ",") . " FROM sectors WHERE $pkName = :id";
-
+        $queryString = rtrim($queryString, ",") . " FROM sectors WHERE $pkName = :id;";
         $query = self::getSecureQuery($queryString, [":id" => $pkValue]);
         $query->execute();
         $result = $query->fetchAll(\PDO::FETCH_ASSOC);

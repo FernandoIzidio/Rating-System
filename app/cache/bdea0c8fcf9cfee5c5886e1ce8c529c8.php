@@ -17,6 +17,7 @@
                 <?php echo e($data["FORM_ERRORS"]["USER_EXISTS_ERROR"]); ?> 
             </div>
         <?php endif; ?>
+        
 
 
 
@@ -28,6 +29,21 @@
         
         <?php endif; ?>
 
+
+        <input type="email" name="email" id="iEmail" placeholder="Email"  minlength="-6">
+        
+
+        <?php if (array_key_exists("emailError", $_GET)): ?>
+            <div class='alert'>
+                <?php echo e($data["FORM_ERRORS"]["EMAIL_INVALID_ERROR"]); ?> 
+            </div>
+        <?php endif; ?>
+
+        <?php if (array_key_exists("emailExistsError", $_GET)): ?>
+            <div class='alert'>
+                <?php echo e($data["FORM_ERRORS"]["EMAIL_EXISTS_ERROR"]); ?> 
+            </div>
+        <?php endif; ?>
 
         <input type="password" name="password1" id="iPassword1" placeholder="Digite a senha"  minlength="-8">
 
@@ -52,20 +68,6 @@
         
         <?php endif; ?>
 
-
-        <label for="setor">Escolha seu setor de atuação:</label>
-        
-        <select name="sector" id="setor">
-            <option value="Recursos Humanos">Recursos Humanos</option>
-            <option value="Administração">Administração</option>
-            <option value="Marketing">Marketing</option>
-            <option value="Financeiro">Financeiro</option>
-            <option value="Produção">Produção</option>
-            <option value="Tecnologia">Tecnologia</option>
-            <option value="Vendas">Vendas</option>
-        </select>
-
-        
         <?php if (array_key_exists("passwdUnMatchError", $_GET)): ?>
             <div class='alert'>
                 <?php echo e($data["FORM_ERRORS"]["PASSWORD_UNMATCH_ERROR"]); ?>
@@ -79,6 +81,29 @@
                 <?php echo e($data["FORM_ERRORS"]["PASSWORD_STRONG_ERROR"]); ?> 
             </div>
         <?php endif; ?>
+
+        
+
+        <label for="setor">Setor:</label>
+        
+        <select name="sector" id="setor">
+            <option value="Recursos Humanos">Recursos Humanos</option>
+            <option value="Administração">Administração</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Financeiro">Financeiro</option>
+            <option value="Produção">Produção</option>
+            <option value="Tecnologia">Tecnologia</option>
+            <option value="Vendas">Vendas</option>
+        </select>
+
+        
+        <?php if (array_key_exists("sectorInvalidError", $_GET)): ?>
+            <div class='alert'>
+                <?php echo e($data["FORM_ERRORS"]["SECTOR_INVALID_ERROR"]); ?> 
+            </div>
+        <?php endif; ?>
+
+        
 
         <button id="iSubmit" type="submit">Registrar</button>   
         

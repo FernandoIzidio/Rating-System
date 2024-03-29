@@ -74,4 +74,15 @@ class AssessmentModel extends BaseModel{
         return $status;
     }
 
+    public static function setAvailability(int $availability, string $likePkName, string $likePkValue): bool{
+        $likePkValue = $likePkValue ? 1 : 0;
+
+        $queryString = "UPDATE assessments SET availability = :availability WHERE $likePkName = :pkValue";
+
+        $query = self::getSecureQuery($queryString, [":availability" => $availability, ":pkValue"=> $likePkValue]);
+        $status = $query->execute();
+
+        return $status;
+    }
+
 }

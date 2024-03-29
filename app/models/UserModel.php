@@ -16,7 +16,7 @@ class UserModel extends BaseModel {
         }
         
         $queryString = rtrim($queryString,",") . " FROM workers WHERE $pkName = :value";
-    
+        
     
         $query = self::getSecureQuery($queryString, [":value"=> $pkValue]);
         $query->execute();
@@ -54,15 +54,15 @@ class UserModel extends BaseModel {
 
     }
 
-    public static function registerUser(string $name, string $username, string $password, string $sector):bool{
+    public static function registerUser(string $name, string $username, string $email, string $password, string $sector):bool{
 
         $hash = password_hash($password, PASSWORD_DEFAULT);
 
 
-        $idSector = self::getField("sector_name", $sector, ["id_sector"])[0]["id_sector"];
+        $idSector = SectorModel::getField("sector_name", $sector, ["id_sector"])[0]["id_sector"];
 
 
-        $query = self::getSecureQuery("INSERT INTO workers(name, user, password, id_sector) VALUES (:name, :user, :password, :id_sector)", [":name"=> $name, ":user" => $username,":password" => $hash,":id_sector" => $idSector]);
+        $query = self::getSecureQuery("INSERT INTO workers(name, user, email, password, id_sector) VALUES (:name, :user, :email, :password, :id_sector)", [":name"=> $name, ":user" => $username,":password" => $hash,":id_sector" => $idSector, ":email" => $email]);
     
         $status = $query->execute();
 
