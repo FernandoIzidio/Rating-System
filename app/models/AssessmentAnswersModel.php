@@ -40,12 +40,4 @@ class AssessmentAnswersModel extends BaseModel{
         return $status;
     }
 
-    public static function deleteAssessmentAnswer(string $idAnswer): bool{
-        $queryString = "DELETE FROM assessment_answers WHERE id_answer = :id";
-
-        $query = self::getSecureQuery($queryString, [":id" => $idAnswer]);
-        $status = $query->execute();
-
-        return $status;
-    }
 }
