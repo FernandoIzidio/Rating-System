@@ -78,7 +78,7 @@ class RegisterController extends BaseRegister {
     
             
             
-            $registerStatus = UserModel::registerUser(trim($name), trim($username), trim($_POST["password1"]), trim($_POST["sector"]));
+            $registerStatus = UserModel::registerUser($name, $username, $password1, trim($_POST["sector"]));
     
     
             if ($registerStatus) {

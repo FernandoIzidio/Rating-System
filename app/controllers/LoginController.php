@@ -19,17 +19,19 @@ class LoginController extends BaseLogin{
 
 
     public function postView(){
+        $user = trim($_POST["user"]);
+        $password = trim($_POST["password"]);
 
-        if (!$this->hasUser(trim($_POST["user"]))){
-            header("Location: /login?userError");
+        if (!$this->hasUser($user)){
+            header("Location: /login?loginError");
             exit();
         }
         
     
 
-        $hash = UserModel::getHash(trim($_POST['user']))[0]['password'];
+        $hash = UserModel::getHash($user)[0]['password'];
         
-        $status = password_verify($_POST["password"], $hash);
+        $status = password_verify($password, $hash);
 
         if (!$status) {
             header("Location: /login?loginError");
@@ -38,9 +40,9 @@ class LoginController extends BaseLogin{
 
     
         $_SESSION["logged_in"] = true;
-        $_SESSION["user"] = $_POST["user"];
+        $_SESSION["user"] = $user;
         
-        $userData = UserModel::getField("user", $_POST["user"], ["id_worker", "rating_permission", "admin_permission", "super_admin"])[0];
+        $userData = UserModel::getField("user", $user, ["id_worker", "rating_permission", "admin_permission", "super_admin"])[0];
 
 
         $_SESSION["user_id"] = $userData["id_worker"];
