@@ -23,12 +23,7 @@ class UserModel extends BaseModel {
 
         $registers = $query->fetchAll(\PDO::FETCH_ASSOC);
 
-        if ($registers) {
-            return $registers[0];
-        } else {
-            throw new \Exception("Registro não encontrado");
-        }
-
+        return $registers;
     }
 
     public static function updateUser(){
