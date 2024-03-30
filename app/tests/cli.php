@@ -1,18 +1,12 @@
 <?php
 
-use app\models\SectorModel;
+use app\models\UserModel;
 
 require_once "../config/cliLoader.php";
 
 require_once "../../vendor/autoload.php";
 
 
+$email = 'johndoe@example.com';
+$newPassword = 'new_password';
 
-        
-$sectors = array_column(SectorModel::getAll(), "id_sector");
-
-$idSector = $sectors[array_rand($sectors)];
-
-print_r($sectors);
-
-print_r($idSector);

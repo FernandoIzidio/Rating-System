@@ -7,7 +7,7 @@ Módulo destinado a metódos de validação, os outros controllers vão ter apen
 namespace app\controllers;
 use app\models\UserModel;
 use Jenssegers\Blade\Blade;
-use PhpParser\Node\Stmt\Return_;
+
 
 abstract class BaseController {
     protected static $blade;
@@ -41,11 +41,8 @@ abstract class BaseController {
     }
 
     public function hasUser(string $user):bool{
-
-
-        $users = UserModel::getUser(trim($user));
-
-
+        $users=  UserModel::getField("user", $user, ["user"]);
+  
         return count($users) > 0;
 
     }
