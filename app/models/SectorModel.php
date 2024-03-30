@@ -17,8 +17,6 @@ class SectorModel extends BaseModel{
         return $result;
     }
 
-
-
     public static function getAll(): array{
         $queryString = "SELECT * FROM sectors";
 
@@ -30,7 +28,7 @@ class SectorModel extends BaseModel{
     }
 
     public static function createSector(string $name): bool{
-        $queryString = "INSERT INTO sectors(name) VALUES (:name)";
+        $queryString = "INSERT INTO sectors(sector_name) VALUES (:name)";
 
         $query = Connection::getConnection()->prepare($queryString);
         $query->bindValue(":name", $name);
@@ -49,7 +47,7 @@ class SectorModel extends BaseModel{
     }
 
     public static function updateSector(string $likeIdName, string $likeIdValue, string $newName): bool{
-        $queryString = "UPDATE sectors SET name = :name WHERE $likeIdName = :id";
+        $queryString = "UPDATE sectors SET sector_name = :name WHERE $likeIdName = :id";
 
         $query = Connection::getConnection()->prepare($queryString);
         $query->bindValue(":id", $likeIdValue);
