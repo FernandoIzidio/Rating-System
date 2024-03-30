@@ -26,32 +26,56 @@ class UserModel extends BaseModel {
         return $registers;
     }
 
-    public static function updateUser(){
-
+    public static function updateUser(string $email, string $newUser){
+        $queryString = "UPDATE workers SET user = :user WHERE email = :email";
+        $query = self::getSecureQuery($queryString, [":email" => $email, ":user"=> $newUser]);
+        $query->execute();
     }
 
-    public static function updatePassword(){
-
+    public static function updatePassword(string $email, string $newPassword){
+        $queryString = "UPDATE workers SET password = :password WHERE email = :email";
+        $query = self::getSecureQuery($queryString, [":email" => $email, ":password"=> $newPassword]);
+        $query->execute();
     }
     
-    public static function updateSector(){}
+    public static function updateSector(string $email, string $newSector){
+        $idSector = SectorModel::getField("sector_name", $newSector, ["id_sector"])[0]["id_sector"];
 
-    public static function deleteUser(){
+        $queryString = "UPDATE workers SET id_sector = :sector WHERE email = :email";
+        $query = self::getSecureQuery($queryString, [":email" => $email, ":sector"=> $idSector]);
+        $query->execute();
+    }
 
+    public static function deleteUser($email){
+        $queryString = "DELETE FROM workers WHERE email = :email";
+        $query = self::getSecureQuery($queryString, [":email" => $email]);
+        $query->execute();
     }
 
 
-    public static function setAdminPermission(){
+    public static function setAdminPermission(string $email, bool $isActive){
+        $isActive = $isActive ?1:0;
 
+        $queryString = "UPDATE workers SET admin_permission = :status WHERE email = :email";
+        $query = self::getSecureQuery($queryString, [":email" => $email, ":status"=> $isActive]);
+        $query->execute();
     }
 
 
-    public static function setSuperAdminPermission(){
+    public static function setSuperAdminPermission($email, bool $isActive){
+        $isActive = $isActive ?1:0;
 
+        $queryString = "UPDATE workers SET super_admin = :status WHERE email = :email";
+        $query = self::getSecureQuery($queryString, [":email" => $email, ":status"=> $isActive]);
+        $query->execute();
     }
 
-    public static function setRatingPermission(){
+    public static function setRatingPermission(string $email, bool $isActive){
+        $isActive = $isActive ?1:0;
 
+        $queryString = "UPDATE workers SET rating_permission = :status WHERE email = :email";
+        $query = self::getSecureQuery($queryString, [":email" => $email, ":status"=> $isActive]);
+        $query->execute();
     }
 
     public static function registerUser(string $name, string $username, string $email, string $password, string $sector):bool{
